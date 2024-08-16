@@ -15,24 +15,24 @@
         "light": "#FFF"
     },
     "anchors": {
-      "from": "#DDDBF4",
-      "to": "#DDDBF4"
+      "from": "#1A1A1A",
+      "to": "#1A1A1A"
     }
   },
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:support@bytehosting.cloud"
     }
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "url": "https://panel.bytehosting.cloud"
   },
   "tabs": [
     {
-      "name": "API Reference",
-      "url": "api-reference"
+      "name": "API Documentation",
+      "url": "api-documentation"
     }
   ],
   "anchors": [
