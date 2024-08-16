@@ -35,23 +35,6 @@
       "url": "api-documentation"
     }
   ],
-  "anchors": [
-    {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://docs.bytehosting.cloud"
-    },
-    {
-      "name": "API Documentation",
-      "icon": "book-open-cover",
-      "url": "https://docs.bytehosting.cloud"
-    },
-    {
-      "name": "Discord Community",
-      "icon": "discord",
-      "url": "https://bytehosting.cloud/discord"
-    }
-  ],
   "navigation": [
     {
       "group": "Get Started",
