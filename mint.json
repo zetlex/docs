@@ -29,9 +29,7 @@
     {
       "group": "Get Started",
       "pages": [
-        "introduction",
-        "quickstart",
-        "development"
+        "Welcome to ByteHosting"
       ]
     },
     {
