@@ -33,6 +33,12 @@
       ]
     },
     {
+      "group": "General Information",
+      "pages": [
+        "reselling"
+      ]
+    },
+    {
       "group": "Essentials",
       "pages": [
         "essentials/markdown",
