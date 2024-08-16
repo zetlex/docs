@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "ByteHosting",
   "logo": {
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
@@ -25,12 +25,6 @@
     "name": "Dashboard",
     "url": "https://panel.bytehosting.cloud"
   },
-  "tabs": [
-    {
-      "name": "API Documentation",
-      "url": "api-documentation"
-    }
-  ],
   "navigation": [
     {
       "group": "Get Started",
