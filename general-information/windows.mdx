@@ -28,3 +28,38 @@ iconType: "solid"
 
 ### Connecting to Your Windows Server
 
+We want to use **remote desktop** (comes with windows) to connect our server.
+Remote Desktop is **automatically enabled** on the server by default.
+
+<Steps>
+  <Step title="Finding Your Login Data">
+    Go to your service by clicking Manage in the service list and click **Show Login Data**.
+
+    You will be provied with the neccesary information to connect to your server.
+    - Username: `Administrator` (always the same)
+    - Password: `RandomlyGenerated`
+    - IP address: `Your Servers IP`
+    - Port: `3389` (always the same)
+
+  </Step>
+  <Step title="Open Remote Desktop Connect">
+    Open the program by searching `Remote Desktop Connection` in your Windows Searchbar.
+    ![title](/images/rdp.png)
+  </Step>
+    <Step title="Fill in Login Data">
+    Computer: `Your Servers IP`
+    Username: `Administrator` (should be by default)
+    ![title](/images/rdp2.png)
+    Click `Connect`.
+
+    Make sure the username is `Administrator` and fill in the `password` with the password from Show Login Data.
+    ![title](/images/rdp3.png)
+
+    A remote desktop session should now open, if make sure that:
+    - Server is online
+    - Windows is installed
+    - Password is correct
+
+    If you can't establish a connection, please contact support by [opening a ticket](https://panel.bytehosting.cloud/createticket).
+  </Step>
+</Steps>
