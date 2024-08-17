@@ -36,7 +36,8 @@
       "group": "General Information",
       "pages": [
         "general-information/reselling",
-        "general-information/windows"
+        "general-information/windows",
+        "general-information/linux"
       ]
     },
     {

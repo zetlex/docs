@@ -1,0 +1,71 @@
+---
+title: 'Connecting to Your Linux Server'
+description: 'A detailed guide to walking you through the process of connecting to your new Linux server.'
+icon: "linux"
+iconType: "solid"
+---
+
+### Graphical User Interface (GUI) or Command Line (CLI)?
+<Steps>
+  <Step title="Command Line (CLI)">
+    If you want to install any flavour of Linux without a GUI, you will need to choose an operating system from our reinstallation button.
+    ![title](/images/dropdown.png)
+
+    All of these operating systems will give you a command line only operating system, where it is possible to install any graphical user interface after.
+
+    ### Connecting to Your Server
+    When connecting to your server without a GUI, we can either use `SSH` or `noVNC`.
+
+    `SSH` is for connecting to your server over the SSH protocol and will require an internet connection on the server, whereas `noVNC` allows you to connect to your server without it having an internet connection. **noVNC is worse for performance and latency**, and doesn't offer text copy & pasting.
+
+    **SSH is the best option for performance**, latency and **allows you to copy paste** between your computer and your server.
+
+    <Steps>
+      <Step title="Connecting via noVNC">
+        Click the `noVNC` button under service managment and a new window will open.
+      </Step>
+      <Step title="Connecting via SSH">
+        You can use third-party programs to connect via SSH or just use your console.
+        
+      <Steps>
+        <Step title="Open CMD">
+          Press `Windows` and type `CMD`
+        </Step>
+        <Step title="Connect via SSH">
+          Type `ssh root@your-servers-ip` and click **ENTER**.
+
+          `root` shows the user you're connecting to.  
+          `your-servers-ip` is replaced by the IP shown in Show Login Data
+        </Step>
+        <Step title="Typing in Password and Accept Fingerprint">
+        You will be met by this warning.
+        ![title](/images/sure.png)
+        Type `yes` and click **ENTER**.
+
+        You can now paste your password in by clicking `RIGHT CLICK` on your mouse and clicking **ENTER**.
+
+        A SSH session should now open, if not make sure that:
+        - Server is online
+        - Linux is installed
+        - Password is correct
+
+        If you can't establish a connection, please contact support by [opening a ticket](https://panel.bytehosting.cloud/createticket).
+        </Step>
+      </Steps>
+
+      </Step>
+    </Steps>
+    
+  </Step>
+  <Step title="Graphical User Interface (GUI)">
+    Use the `Insert ISO` button to upload your preferred .iso file to the server.
+    **We do not provide support** for the the operating systems in Insert ISO.
+
+    Use **noVNC to connect** to the server and you should be met an installation wizard taking you through configuring the operating system.
+
+    You will configure the operating system, like if you were installing it on a **real machine**.
+
+    Some ISO's support **automatic network configuration**, but not all. You can find the required details under service management.
+    
+  </Step>
+</Steps>
