@@ -41,6 +41,12 @@
       ]
     },
     {
+      "group": "Control Panel",
+      "pages": [
+        "control-panel/finding-login"
+      ]
+    },
+    {
       "group": "Essentials",
       "pages": [
         "essentials/markdown",
