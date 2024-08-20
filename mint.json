@@ -43,7 +43,8 @@
     {
       "group": "Control Panel",
       "pages": [
-        "control-panel/finding-login"
+        "control-panel/finding-login",
+        "control-panel/renew"
       ]
     },
     {
