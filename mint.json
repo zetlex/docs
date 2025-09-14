@@ -11,8 +11,8 @@
     "light": "#DDDBF4",
     "dark": "#DDDBF4",
     "background": {
-        "dark": "#1A1A1A",
-        "light": "#FFF"
+      "dark": "#1A1A1A",
+      "light": "#FFF"
     }
   },
   "topbarLinks": [
@@ -28,9 +28,7 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": [
-        "welcome"
-      ]
+      "pages": ["welcome"]
     },
     {
       "group": "General Information",
@@ -46,11 +44,11 @@
         "control-panel/finding-login",
         "control-panel/renew"
       ]
-    },
+    }
   ],
   "footerSocials": {
-    "x": "https://x.com/bytehostiing",
+    "x": "https://x.com/bytehosting",
     "discord": "https://bytehosting.cloud/discord",
-    "website": "mailto:support@bytehosting.cloud"
+    "website": "https://bytehosting.cloud"
   }
 }
