@@ -45,6 +45,12 @@
         "control-panel/renew"
       ]
     }
+    {
+      "group": "Tutorials",
+      "pages": [
+        "tutorials/netdata"
+      ]
+    }
   ],
   "footerSocials": {
     "x": "https://x.com/bytehosting",
