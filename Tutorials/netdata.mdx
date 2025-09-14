@@ -1,5 +1,181 @@
 ---
-title: 'New file'
-description: 'Description of your new file.'
+title: "Install Netdata on a ByteHosting Server"
+description: "A clear, copy-pasteable guide to get real-time monitoring running on your ByteHosting VPS with secure access options and Netdata Cloud."
 ---
 
+---
+
+## Why Netdata?
+
+Netdata gives you second-by-second insights into CPU, memory, disks, network, databases and more — straight from a lightweight agent with a built-in web UI (default port `19999`). ([learn.netdata.cloud](http://learn.netdata.cloud))
+
+---
+
+## Prerequisites
+
+- A ByteHosting VPS with a supported Linux (Ubuntu/Debian, Rocky/Alma/CentOS, etc.).
+- SSH access with a user that can `sudo`.
+- (Optional, recommended) A Netdata Cloud account if you want secure, remote access without opening ports.
+
+---
+
+## TL;DR (one-liner install)
+
+```
+# Stable channel + non-interactive + auto-updates
+sudo bash -c 'bash <(curl -Ss https://get.netdata.cloud/kickstart.sh) --release-channel stable --non-interactive --auto-update'
+```
+
+This is the official kickstart installer. It detects your distro and sets up the agent and service for you. ([learn.netdata.cloud](http://learn.netdata.cloud))
+
+When it finishes, verify:
+
+```
+sudo systemctl status netdata
+```
+
+Open the local dashboard (temporarily via SSH port-forward):
+
+```
+# On your laptop:
+ssh -L 19999:localhost:19999 <user>@<your-vps-ip>
+# Then browse http://localhost:19999
+```
+
+The dashboard listens on port `19999`. Don’t expose it publicly yet — see **Secure access options** below. ([learn.netdata.cloud](http://learn.netdata.cloud))
+
+---
+
+## Step-by-step (recommended path)
+
+### 1) Update packages & basic tools
+
+```
+# Ubuntu / Debian
+sudo apt update && sudo apt install -y curl ca-certificates
+
+# RHEL / Rocky / Alma
+sudo dnf -y install curl ca-certificates
+```
+
+### 2) Install Netdata (stable channel)
+
+```
+sudo bash -c 'bash <(curl -Ss https://get.netdata.cloud/kickstart.sh) --release-channel stable --non-interactive --auto-update'
+```
+
+> Prefer `stable` for production. You can also install a specific version or the nightly channel with flags. ([learn.netdata.cloud](http://learn.netdata.cloud))
+
+### 3) Confirm it’s running
+
+```
+sudo systemctl is-active --quiet netdata && echo "Netdata is running ✅" || sudo journalctl -u netdata --no-pager | tail -n 50
+```
+
+### 4) (Recommended) Connect to Netdata Cloud — no port opening required
+
+From your Netdata Cloud **Space → Room → Add nodes**, grab your **claim token** and (optionally) **room name**, then run:
+
+```
+sudo bash -c 'bash <(curl -Ss https://get.netdata.cloud/kickstart.sh) \
+  --claim-token YOUR_TOKEN \
+  --claim-rooms YOUR_ROOM \
+  --claim-url https://app.netdata.cloud \
+  --non-interactive'
+```
+
+This securely links your VPS to Netdata Cloud over ACLK so you can access the dashboard from anywhere without exposing port `19999`. ([learn.netdata.cloud](http://learn.netdata.cloud))
+
+---
+
+## Secure access options (choose one)
+
+**A) Netdata Cloud (easiest, recommended)**\
+No firewall changes; manage multiple nodes centrally. See the **claim** flags above. ([learn.netdata.cloud](http://learn.netdata.cloud))
+
+**B) Restrict with firewall (expose **`19999`**only to your IP)** 
+
+```
+# Ubuntu/Debian with UFW:
+sudo ufw allow from <your.home.ip>/32 to any port 19999 proto tcp
+
+# RHEL family with firewalld:
+sudo firewall-cmd --add-rich-rule='rule family="ipv4" source address="<your.home.ip>/32" port protocol="tcp" port="19999" accept' --permanent
+sudo firewall-cmd --reload
+```
+
+**C) Keep it **[**localhost**](http://localhost)** \+ SSH tunnel (no exposure)**
+
+```
+ssh -L 19999:localhost:19999 <user>@<your-vps-ip>
+# Browse http://localhost:19999
+```
+
+(You can also front it with Nginx \+ HTTPS \+ auth if you prefer a reverse proxy.)
+
+---
+
+## Useful commands
+
+**Service & logs**
+
+```
+sudo systemctl status netdata
+sudo journalctl -u netdata -e
+```
+
+**Check port is listening**
+
+```
+ss -tulpn | grep 19999
+```
+
+**Manual update (re-run installer)**
+
+```
+wget -O /tmp/netdata-kickstart.sh https://get.netdata.cloud/kickstart.sh
+sudo sh /tmp/netdata-kickstart.sh --release-channel stable
+```
+
+Re-running the kickstart script updates an existing install. ([learn.netdata.cloud](http://learn.netdata.cloud))
+
+**Enable/disable auto-updates**
+
+```
+# Typical path for repo/source installs:
+sudo /usr/libexec/netdata/netdata-updater.sh --enable-auto-updates
+# …or:
+sudo /usr/libexec/netdata/netdata-updater.sh --disable-auto-updates
+```
+
+(If you used the static build, the path is under `/opt/netdata/usr/libexec/…`.) ([Netdata Community Forums](https://community.netdata.cloud/t/known-issue-with-automatic-updates-in-netdata-v1-33-1-28-nightly/2648?utm_source=chatgpt.com))
+
+**Uninstall completely**
+
+```
+wget -O /tmp/netdata-kickstart.sh https://get.netdata.cloud/kickstart.sh
+sudo sh /tmp/netdata-kickstart.sh --uninstall
+```
+
+Use the same kickstart script with `--uninstall`. ([learn.netdata.cloud](http://learn.netdata.cloud))
+
+---
+
+## Troubleshooting
+
+- **The dashboard doesn’t load remotely**\
+  By default Netdata listens on `19999`. If you haven’t set up Cloud, either allow your IP to reach `19999` via firewall or use an SSH tunnel. ([learn.netdata.cloud](http://learn.netdata.cloud))
+- **Updater path not found**\
+  The updater location differs between install types (repo/source vs static). Check `/usr/libexec/netdata/` and `/opt/netdata/usr/libexec/`. ([Netdata Community Forums](https://community.netdata.cloud/t/known-issue-with-automatic-updates-in-netdata-v1-33-1-28-nightly/2648?utm_source=chatgpt.com))
+- **Cloud claim issues**\
+  Re-run the kickstart with your claim token/room, or use the Cloud “Add nodes” flow again to generate fresh flags. ([learn.netdata.cloud](http://learn.netdata.cloud))
+
+---
+
+## What you get
+
+- Real-time, per-second graphs for system and apps.
+- Zero-config dashboards out of the box; turn it into a multi-node view with Netdata Cloud.
+- Minimal footprint suitable for ByteHosting VPS sizes.
+
+Happy monitoring\!
