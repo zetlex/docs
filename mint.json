@@ -48,7 +48,8 @@
     {
       "group": "Tutorials",
       "pages": [
-        "tutorials/netdata"
+        "tutorials/netdata",
+        "tutorials/defguard"
       ]
     }
   ],
