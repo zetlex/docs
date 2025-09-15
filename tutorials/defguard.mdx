@@ -1,0 +1,92 @@
+---
+title: "Deploy Defguard on ByteHosting VPS"
+description: "Step-by-step guide to deploy Defguard on a ByteHosting VPS"
+---
+
+# Deploy Defguard on ByteHosting VPS
+
+This guide will walk you through deploying [Defguard](https://defguard.net) on a ByteHosting VPS.\
+By following these steps, you can have Defguard up and running in just a few minutes.
+
+## 1. Create a ByteHosting account
+
+1. Go to [ByteHosting Panel](https://panel.bytehosting.cloud).
+2. Create an account.
+
+## 2. Provision a VPS
+
+1. Log in to [ByteHosting Panel](https://panel.bytehosting.cloud).
+2. Choose a VPS plan that suits your needs. We recommend at least:
+   - **2 vCPU**
+   - **4 GB RAM**
+   - **50 GB NVMe storage**
+   - **Ubuntu 22.04 LTS**
+3. Deploy the VPS — provisioning is instant.
+
+## 3. Connect to your VPS
+
+Use SSH to connect to your server:
+
+```bash
+ssh root@your-vps-ip
+```
+
+## 4. Install Docker and Docker Compose
+
+Defguard runs smoothly in Docker. Install it with:
+
+```bash
+apt update && apt upgrade -y
+apt install -y docker.io docker-compose
+systemctl enable docker
+systemctl start docker
+```
+
+## 5. Deploy Defguard
+
+1. Create a working directory:
+
+```bash
+mkdir /opt/defguard && cd /opt/defguard
+```
+
+2. Create a `docker-compose.yml` file:
+
+```yaml
+version: '3'
+
+services:
+  defguard:
+    image: defguard/defguard:latest
+    container_name: defguard
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/var/lib/defguard
+```
+
+3. Start Defguard:
+
+```bash
+docker-compose up -d
+```
+
+## 6. Access Defguard
+
+Open your browser and go to:
+
+```bash
+http://your-vps-ip:8080
+```
+
+You now have Defguard running on a ByteHosting VPS.
+
+## 7. Next steps
+
+- Configure your identity and VPN settings in the Defguard dashboard.
+- For production use, set up HTTPS with a reverse proxy like Nginx and Let’s Encrypt.
+
+## Support
+
+If you need help with your VPS, open a ticket in the [ByteHosting Panel](https://panel.bytehosting.cloud)
